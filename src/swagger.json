@@ -1,0 +1,348 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API para simular vacinação",
+    "description": "Essa API tem como objetivo a manipulação de vacinação dos pacientes em prol do combate do COVID-19",
+    "termsOfService": "http://localhost:5000/terms",
+    "contact": {
+      "email": "williansilvarj96@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/",
+      "description": "API com as regras de negócios"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Cadastro de posto",
+        "description": "Essa rota será responsável por cadastrar um posto de saúde",
+        "tags": ["User"],        
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema" : {
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "telephone": {
+                    "type": "string"
+                  },
+                  "amountOfVaccinePerDay": {
+                    "type": "number",
+                    "required": false
+                  },
+                  "_address": {
+                    "$ref": "#/components/schemas/address"
+                  }        
+                }
+              },            
+              "examples": {
+                "user": {
+                  "value": {
+                    "email": "emaildoposto@posto.gov.br",
+                    "password": "passExample",
+                    "name": "Hospital Bom Jesus",
+                    "telephone": "2133333333",
+                    "_address": {
+                      "street": "Rua Paissandu",
+                      "number": "38A",
+                      "district": "Flamengo",
+                      "zipCode":  22210080,
+                      "uf": "RJ"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Health center already exists!"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "telephone": {
+                      "type": "string"
+                    },
+                    "amountOfVaccinePerDay": {
+                      "type": "number",
+                      "required": false
+                    },
+                    "_address": {
+                      "$ref": "#/components/schemas/address"
+                    }        
+                  }                   
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Login",
+        "description": "Essa rota será responsável por fazer o login do posto de saúde",
+        "tags": ["Login"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema" : {
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }  
+                }
+              },            
+              "examples": {
+                "user": {
+                  "value": {
+                    "email": "emaildoposto@posto.gov.br",
+                    "password": "passExample"                    
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {         
+          "401": {          
+            "description": "User Not Found! or Password Incorrect"
+          },         
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "id": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "telephone": {
+                        "type": "string"
+                      },
+                      "amountOfVaccinePerDay": {
+                        "type": "number",
+                        "required": false
+                      }       
+                    },
+                    "token": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    }
+                  }                   
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/doctor": {
+      "post": {
+        "summary": "Cadastro do médico",
+        "description": "Essa rota será responsável por cadastrar um médico que pertence ao posto de saúde",
+        "tags": ["Doctor"],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema" : {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "cell": {
+                    "type": "string"
+                  },
+                  "crm": {
+                    "type": "string"
+                  },
+                  "age": {
+                    "type": "number"
+                  },
+                  "cpf": {
+                    "type": "string"                    
+                  },
+                  "rg": {
+                    "type": "string"                    
+                  },
+                  "_address": {
+                    "$ref": "#/components/schemas/address"
+                  }        
+                }
+              },            
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Gabriella Vieira de Jesus",
+                    "cell": "11987657854",
+                    "crm": "777777A",
+                    "age": 40,
+                    "cpf": "86756498764",
+                    "rg": "992557659",
+                    "_address": {
+                      "street": "Rua Rio de Janeiro",
+                      "number": "1590B",
+                      "district": "Jardim Carvalho",
+                      "zipCode":  84010560,
+                      "uf": "PR"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Doctor already exists!"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "cell": {
+                      "type": "string"
+                    },
+                    "crm": {
+                      "type": "string"
+                    },
+                    "age": {
+                      "type": "number"
+                    },
+                    "cpf": {
+                      "type": "string"                    
+                    },
+                    "rg": {
+                      "type": "string"                    
+                    },
+                    "address": {                                                        
+                      "$ref": "#/components/schemas/address"                    
+                    },
+                    "healthCenter": {
+                      "$ref": "#/components/schemas/healthCenter"
+                    }
+                  }                   
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "address": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "district": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "number",
+            "minimum": 8,
+            "maximum": 8
+          },
+          "uf": {
+            "type": "string",
+            "minimum": 2,
+            "maximum": 2
+          }
+        }
+      },
+      "healthCenter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "telephone": {
+            "type": "string"
+          },
+          "amountOfVaccinePerDay": {
+            "type": "number"            
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
