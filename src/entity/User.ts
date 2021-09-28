@@ -38,7 +38,7 @@ export class User extends BaseEntity {
   @Max(14)
   cnpj: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, default: 0 })
   amountOfVaccinePerDay: number;
 
   @ManyToOne(() => Address)
