@@ -38,6 +38,9 @@
                   "telephone": {
                     "type": "string"
                   },
+                  "cnpj": {
+                    "type": "string"
+                  },
                   "amountOfVaccinePerDay": {
                     "type": "number",
                     "required": false
@@ -54,6 +57,7 @@
                     "password": "passExample",
                     "name": "Hospital Bom Jesus",
                     "telephone": "2133333333",
+                    "cnpj": "68064814000123",
                     "_address": {
                       "street": "Rua Paissandu",
                       "number": "38A",
@@ -91,6 +95,9 @@
                       "type": "string"
                     },
                     "telephone": {
+                      "type": "string"
+                    },
+                    "cnpj": {
                       "type": "string"
                     },
                     "amountOfVaccinePerDay": {
@@ -323,12 +330,17 @@
             "type": "string"
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "minimum": 6,
+            "maximum": 16
           },
           "name": {
             "type": "string"
           },
           "telephone": {
+            "type": "string"
+          },
+          "cnpj": {
             "type": "string"
           },
           "amountOfVaccinePerDay": {

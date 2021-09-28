@@ -1,5 +1,6 @@
 import { Response } from "express";
 import { User } from "../entity/User";
+import { UserCreate } from "../interface/UserInterface";
 import { UserService } from "../services/UsersService";
 import { ExampleBaseRequest } from "../utils/ExampleBaseRequest";
 
@@ -27,7 +28,7 @@ export class UserController {
 
   //   // retorno é uma promise de response. Criando User
   async create(
-    { email, password, name, telephone, _address },
+    { email, password, name, telephone, cnpj, _address }: UserCreate,
     res: Response
   ): Promise<Response> {
     const usersService = new UserService();
@@ -38,6 +39,7 @@ export class UserController {
         password,
         name,
         telephone,
+        cnpj,
         _address,
       });
 

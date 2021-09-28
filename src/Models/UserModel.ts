@@ -5,6 +5,7 @@ export class UserModel  {
   password: string;
   name: string;
   telephone: string;
+  cnpj: string;
   amountOfVaccinePerDay: number;
   addressID: Address
 }

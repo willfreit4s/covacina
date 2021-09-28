@@ -33,6 +33,11 @@ export class User extends BaseEntity {
   @Max(10)
   telephone: string;
 
+  @Column({length: 14, unique: true})
+  @Min(14)
+  @Max(14)
+  cnpj: string;
+
   @Column({ nullable: true })
   amountOfVaccinePerDay: number;
 

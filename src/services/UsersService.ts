@@ -25,7 +25,7 @@ class UserService {
     }
   }
 
-  async create({ email, password, name, telephone, _address }: UserCreate) {
+  async create({ email, password, name, telephone, cnpj, _address }: UserCreate) {
     const usersRepository = getCustomRepository(UsersRepository);
     const addressService = new AddressService();
     try {
@@ -44,6 +44,7 @@ class UserService {
         password,
         name,
         telephone,
+        cnpj,
         addressID: address,
       });
 

@@ -5,6 +5,7 @@ export interface UserCreate {
   password: string;
   name: string;
   telephone: string;
+  cnpj: string;
   _address: Address
 }
 
